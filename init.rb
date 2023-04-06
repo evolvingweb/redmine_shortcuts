@@ -1,4 +1,6 @@
-require 'redmine_shortcuts/hooks/hooks'
+Rails.configuration.to_prepare do
+  require 'redmine_shortcuts/hooks/hooks'
+end
 
 Redmine::Plugin.register :redmine_shortcuts do
   name 'Redmine Shortcuts'
