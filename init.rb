@@ -1,12 +1,17 @@
-Rails.configuration.to_prepare do
-  require 'redmine_shortcuts/hooks/hooks'
-end
+require 'redmine'
+
+# Tell Zeitwerk to ignore this plugin's lib directory
+plugin_lib = File.join(File.dirname(__FILE__), 'lib')
+Rails.autoloaders.each { |loader| loader.ignore(plugin_lib) }
+
+# Require plugin files
+require File.join(plugin_lib, 'redmine_shortcuts/hooks')
 
 Redmine::Plugin.register :redmine_shortcuts do
   name 'Redmine Shortcuts'
   author 'Davide Giacometti'
   description 'Provides useful keyboard shortcuts'
-  version '0.4.1'
+  version '6.0.0'
   url 'https://github.com/davidegiacometti/redmine_shortcuts'
   author_url 'https://github.com/davidegiacometti'
 
