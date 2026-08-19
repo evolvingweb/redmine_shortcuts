@@ -1,17 +1,13 @@
 require 'redmine'
 
-# Tell Zeitwerk to ignore this plugin's lib directory
-plugin_lib = File.join(File.dirname(__FILE__), 'lib')
-Rails.autoloaders.each { |loader| loader.ignore(plugin_lib) }
-
-# Require plugin files
-require File.join(plugin_lib, 'redmine_shortcuts/hooks')
-
+# R7: no loader.ignore / manual require — the RedmineShortcuts::Hooks ViewListener
+# (lib/redmine_shortcuts/hooks.rb) self-registers on Zeitwerk eager-load. refs #108530.
 Redmine::Plugin.register :redmine_shortcuts do
   name 'Redmine Shortcuts'
   author 'Davide Giacometti'
   description 'Provides useful keyboard shortcuts'
-  version '6.0.0'
+  version '7.0.0'
+  requires_redmine version_or_higher: '7.0.0'
   url 'https://github.com/davidegiacometti/redmine_shortcuts'
   author_url 'https://github.com/davidegiacometti'
 
